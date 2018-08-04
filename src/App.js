@@ -33,7 +33,6 @@ class App extends Component {
      * }
      */
     
-
     this.props.db.collection("food").get().then((snapshot) => {
       const foods = [];
 

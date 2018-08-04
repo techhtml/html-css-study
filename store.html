@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="food-list">
+    Loading
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-firestore.js"></script>
+  <script>
+      var config = {
+        apiKey: "AIzaSyCek5Tlr2B8pwYFFk08P0vY4yL6FQd-s1g",
+        authDomain: "goodchoeun.firebaseapp.com",
+        databaseURL: "https://goodchoeun.firebaseio.com",
+        projectId: "goodchoeun",
+        storageBucket: "goodchoeun.appspot.com",
+        messagingSenderId: "1016783094902"
+      };
+      firebase.initializeApp(config);
+
+      var db = firebase.firestore();
+      db.settings({timestampsInSnapshots: true})
+
+      db.collection("food").get().then(((snapshot) => {
+        let FoodList = [];
+
+        snapshot.forEach((doc) => {
+          // VIEW를 생성해줘야...
+          // DATA만 넣어줘야...
+          
+          const data = doc.data();
+          FoodList.push(`<div>${data.name}</div>`)
+        })
+
+        let Wrapper = document.querySelector("#food-list");
+        Wrapper.innerHTML = FoodList.join("");
+      }))
+  </script>
+</body>
+</html>
